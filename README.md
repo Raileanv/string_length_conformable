@@ -1,5 +1,7 @@
 # StringLengthConformable
 
+[![Gem Version](https://badge.fury.io/rb/string_length_conformable.svg)](https://badge.fury.io/rb/string_length_conformable)
+
 # USE WITH MySQL
 
 If you have some attributes in your models with type string (varchar(255) by default).
