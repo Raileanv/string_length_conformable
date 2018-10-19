@@ -1,5 +1,11 @@
 # StringLengthConformable
 
+If you have some attributes in your models with type string (varchar(255) by default).
+And you haven't validate length of it, you can face once with a problem when user will
+pass in form field more characters. Then, your database, most probably will throw an error 500.
+To avoid such kind a problems I've createt this gem.
+
+This gem will throw a human readable exception when there are not validations applied for string, and user tries to pass longer string, then is specified in DB.
 
 ## Installation
 
