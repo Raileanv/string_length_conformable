@@ -2,7 +2,13 @@ require "string_length_conformable/version"
 
 ActiveSupport.on_load(:active_record) do
   class ActiveRecord::Base
+    class NotMysqlDb < StandardError; end
     def self.acts_as_string_length_conformable
+
+      unless ActiveRecord::Base.connection.instance_of? ActiveRecord::ConnectionAdapters::MysqlAdapter
+        raise NotMysqlDb, 'Please use this gem with mysql. But better use PostgreSQL and be happy!'
+      end
+
       validates_with LengthOfStringValidator
     end
     class LengthOfStringValidator < ActiveModel::Validator
