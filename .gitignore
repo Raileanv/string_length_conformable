@@ -1,0 +1,17 @@
+/.bundle/
+/.yardoc
+/Gemfile.lock
+/_yardoc/
+/coverage/
+/doc/
+/pkg/
+/spec/reports/
+/tmp/
+
+*.gem
+
+# byebug
+.byebug_history
+
+# macOS
+*.DS_Store
