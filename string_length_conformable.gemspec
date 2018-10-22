@@ -10,18 +10,26 @@ Gem::Specification.new do |spec|
 
   spec.summary       = 'Gem for validate string length'
   spec.description   = <<-TEXT
+  \n
   This gem resolves basically two problems.
+  \n
   ---
+  \n
   1. MySQL for strings(VARCHAR(255)) by default has limit 255 characters. And when developer left this attribute without any length validation, then it's possible to face with situation when user unintentionally or intentionally will pass in text field more characters. So, then, probably you will get 500...
+  \n
   ---
+  \n
   2. PostgreSQL. The maximum number of characters for variable unlimited length types (text, varchar) is undefined. There is a limit of size in bytes for all string types: In any case, the longest possible character string that can be stored is about 1 GB.
   And when developer left this attribute without any length validation, then it's possible to face with situation when user unintentionally or intentionally will try to full up your database with lots of GB of 'important' info.
+  \n
   ---
-
+  \n
   Both of this cases, I guess, are not very pleasant.
+  \n
 
   This gem adds default length validation for all string attributes.
   Except those which are already vlidated in standart rails way.
+  \n
 
   TEXT
 
