@@ -20,7 +20,7 @@ class PostgresqlLengthOfStringValidator < ActiveModel::Validator
       new_length = record.instance_eval(attr_name).length
 
       if new_length > permited_length.to_i
-        record.errors.add attr_name, "too long, #{permited_length.to_i} characters is the maximum allowed"
+        record.errors.add attr_name, "is too long, #{permited_length.to_i} characters is the maximum allowed"
         log
       end
     end

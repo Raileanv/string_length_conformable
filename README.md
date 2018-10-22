@@ -2,14 +2,20 @@
 
 [![Gem Version](https://badge.fury.io/rb/string_length_conformable.svg)](https://badge.fury.io/rb/string_length_conformable)
 
-# USE WITH MySQL
+# Description
 
-If you have some attributes in your models with type string (varchar(255) by default).
-And you haven't validate length of it, you can face once with a problem when user will
-pass in form field more characters. Then, your database(MySQL), most probably will throw an error 500.
-To avoid such kind a problems I've createt this gem.
+### This gem resolves basically two problems.
+---
+1. MySQL for strings(VARCHAR(255)) by default has limit 255 characters. And when developer left this attribute without any length validation, then it's possible to face with situation when user unintentionally or intentionally will pass in text field more characters. So, then, probably you will get 500...
+---
+2. PostgreSQL. The maximum number of characters for variable unlimited length types (text, varchar) is undefined. There is a limit of size in bytes for all string types: In any case, the longest possible character string that can be stored is about 1 GB.
+And when developer left this attribute without any length validation, then it's possible to face with situation when user unintentionally or intentionally will try to full up your database with lots of GB of 'important' info.
+---
 
-This gem will throw a human readable exception when there are not validations applied for string, and user tries to pass longer string, then is specified in DB.
+Both of this cases, I guess, are not very pleasant.
+
+This gem adds default length validation for all string attributes.
+Except those which are already vlidated in standart rails way.
 
 ## Installation
 
@@ -47,6 +53,39 @@ class ApplicationRecord < ActiveRecord::Base
 end
 
 ```
+
+## Example
+
+```ruby
+#schema.rb
+create_table "users", force: :cascade do |t|
+  t.string "name"
+  t.string "description"
+  t.datetime "created_at", null: false
+  t.datetime "updated_at", null: false
+end
+```
+
+```ruby
+# user.rb
+class User < ApplicationRecord
+  acts_as_string_length_conformable
+  validates :description, length: { maximum: 800 }
+end
+```
+`example for MySQL(VARCHAR(255))`
+```ruby
+john = User.new
+john.name = 'n'*500 # exception "is too long, 255 characters is the maximum allowed"
+john.description = 'd'*799 # ok
+```
+`example for PostgreSQL(1gb)`
+```ruby
+john = User.new
+john.name = 'n'*100.000.000.000 # exception "is too long, 1000 characters is the maximum allowed"
+john.description = 'd'*799 #
+```
+___
 
 ## License
 
