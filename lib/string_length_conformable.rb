@@ -15,7 +15,7 @@ ActiveSupport.on_load(:active_record) do
       else
         text = <<-TEXT
           Unfortunately #{ActiveRecord::Base.connection.adapter_name} is not supported yet,
-          please create an issue #{https://github.com/Yaponcik/string_length_conformable/issues},
+          please create an issue https://github.com/Yaponcik/string_length_conformable/issues,
           or pull request!
         TEXT
         railse NotImplementedForDb, text
