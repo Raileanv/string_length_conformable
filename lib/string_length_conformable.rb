@@ -18,7 +18,7 @@ ActiveSupport.on_load(:active_record) do
           please create an issue https://github.com/Yaponcik/string_length_conformable/issues,
           or pull request!
         TEXT
-        railse NotImplementedForDb, text
+        raise NotImplementedForDb, text
       end
     end
   end
